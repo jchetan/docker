@@ -1,0 +1,15 @@
+{
+  "name": "docker_expt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "redis": "2.8.0"
+  }
+}
