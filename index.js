@@ -11,10 +11,17 @@ redis_client.set('visits', 0);
 app.get(
     '/',
     (req, res) => {
-        redis_client.get('visits', (err, visits)=> {
+        redis_client.get('visits', (err, visits) => {
             res.send('Hi There no of visits is:' + visits);
             redis_client.set('visits', parseInt(visits) + 1);
         });
+    }
+);
+
+app.get(
+    '/crash',
+    (req, res) => {
+        res.send('Hi There its crashed');
     }
 );
 
