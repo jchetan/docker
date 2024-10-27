@@ -1,5 +1,6 @@
 const express = require('express');
 const redis = require('redis');
+const process = require('process');
 
 const app = express();
 const redis_client = redis.createClient({
@@ -21,7 +22,7 @@ app.get(
 app.get(
     '/crash',
     (req, res) => {
-        res.send('Hi There its crashed');
+        process.exit(0);
     }
 );
 
