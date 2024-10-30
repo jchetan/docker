@@ -11,6 +11,8 @@ services:
     volumes:
       - /app/node_modules
       - ./backend:/app
+    # ports:
+    #   - 7000:7000
   frontend:
     environment:
       - WDS_SOCKET_PORT=0
