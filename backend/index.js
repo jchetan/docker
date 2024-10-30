@@ -1,8 +1,12 @@
 const express = require('express');
 const redis = require('redis');
 const process = require('process');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
+app.use(cors);
+app.use(bodyParser.json);
 const redis_client = redis.createClient({
     host: "redis-server",
     port: 6379
@@ -26,9 +30,19 @@ app.get(
     }
 );
 
+app.post(
+    '/value',
+    async (req, res) => {
+        const key = req.body.key;
+        const value = req.body.value;
+        await redis_client.set(key, value);
+        res.send('Success');
+    }
+);
+
 app.listen(
-    8080,
+    5000,
     () => {
-        console.log('Listening on port 8080');
+        console.log('Listening on port 5000');
     }
 );
