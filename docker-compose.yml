@@ -1,14 +1,32 @@
 version: '3'
 services:
-  redis-server:
+  redis:
     image: 'redis'
-  node-app:
-    build: ./backend
-    ports:
-      - "5000:5000"
+  backend:
+    depends_on:
+      - redis
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./backend:/app
   frontend:
+    environment:
+      - WDS_SOCKET_PORT=0
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+  nginx:
+    depends_on:
+      - frontend
+      - backend
+    restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.dev
     ports:
-      - "3000:3000"
+      - 3000:80

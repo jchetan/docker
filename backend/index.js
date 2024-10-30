@@ -8,25 +8,23 @@ const app = express();
 app.use(cors);
 app.use(bodyParser.json);
 const redis_client = redis.createClient({
-    host: "redis-server",
+    host: "redis",
     port: 6379
 });
 redis_client.set('visits', 0);
 
 app.get(
-    '/',
+    '/api',
     (req, res) => {
-        redis_client.get('visits', (err, visits) => {
-            res.send('Hi There no of visits is:' + visits);
-            redis_client.set('visits', parseInt(visits) + 1);
-        });
-    }
-);
-
-app.get(
-    '/crash',
-    (req, res) => {
-        process.exit(0);
+        try {
+            const workouts = {
+                name: "reps",
+                id: 2
+            };
+            res.status(200).json(workouts);
+        } catch (error) {
+            res.status(400).json({ error: "error happened" });
+        }
     }
 );
 
