@@ -14,7 +14,7 @@ const redis_client = redis.createClient({
 
 //get all keys
 app.get(
-    '/api',
+    '/api/getkeys',
     (req, res) => {
         redis_client.keys('*', (err, keys) => {
             if (err) throw err;
@@ -26,7 +26,7 @@ app.get(
 
 //get value for a key
 app.get(
-    '/api/:key',
+    '/api/getvalue/:key',
     async (req, res) => {
         const { key } = req.params;
         try {
@@ -46,7 +46,7 @@ app.get(
 
 // set key and value
 app.post(
-    '/api',
+    '/api/additem',
     async (req, res) => {        
         const { key, value } = req.body;
         try {

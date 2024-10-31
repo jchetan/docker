@@ -10,9 +10,7 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - /app/node_modules
-      - ./backend:/app
-    # ports:
-    #   - 7000:7000
+      - ./backend:/app    
   frontend:
     environment:
       - WDS_SOCKET_PORT=0

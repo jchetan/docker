@@ -2,15 +2,15 @@ import { useState } from 'react'
 
 const ItemForm = () => {
 
-    const [title, setTitle] = useState('');
+    const [key, setKey] = useState('');
     const [value, setValue] = useState('');
     const [message, setMessage] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const item = {title, value};
+        const item = {key, value};
         const response = await fetch(
-            '/api/items',
+            '/api/additem',
             {
                 method: 'POST',
                 body: JSON.stringify(item),
@@ -23,9 +23,9 @@ const ItemForm = () => {
         if (!response.ok) {
             setMessage(json.error);
         } else {
-            setTitle('');
+            setKey('');
             setValue('');
-            setMessage('Workout Added');
+            setMessage('Item Added');
         }
     }
 
@@ -34,13 +34,13 @@ const ItemForm = () => {
             <div className="col-4 border">
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
-                        <label htmlFor="itemTitle" className="form-label">Item Title</label>
+                        <label htmlFor="itemKey" className="form-label">Item Key</label>
                         <input 
                             type="text" 
                             className="form-control" 
-                            id="itemTitle"
-                            onChange={(e) => setTitle(e.target.value)}
-                            value={title}
+                            id="itemKey"
+                            onChange={(e) => setKey(e.target.value)}
+                            value={key}
                         />
                     </div>
                     <div className="mb-3">
