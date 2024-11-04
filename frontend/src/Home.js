@@ -20,8 +20,7 @@ const Home = () => {
   );
 
   return (
-    <div className='container'>
-      Hello world!
+    <div className='container'>      
       {keys && keys.map((key1) => {
         return (
           <div key={key1} className="row justify-content-center" >
