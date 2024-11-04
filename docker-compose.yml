@@ -8,18 +8,12 @@ services:
     build: 
       context: ./backend
       dockerfile: Dockerfile.dev
-    volumes:
-      - /app/node_modules
-      - ./backend:/app    
   frontend:
     environment:
       - WDS_SOCKET_PORT=0
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
-    volumes:
-      - /app/node_modules
-      - ./frontend:/app
   nginx:
     depends_on:
       - frontend
@@ -29,4 +23,4 @@ services:
       context: ./nginx
       dockerfile: Dockerfile.dev
     ports:
-      - 3000:80
+      - 5000:80
